@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 import { Request, Response, NextFunction } from 'express';
 import  { UserDocument, User } from '../models/user.model'; // Import de UserDocument depuis le fichier user.model.ts
 import { secretKey } from '../../config/db.config';
-import { UserProps, UserCredential, UserWithoutPwdandAdmin} from '../interface/auth/user'; 
+import { UserProps, UserCredential, UserWithoutPwdandAdmin, UserPasswordOnly} from '../interface/auth/user'; 
 import { GenerateToken } from '../interface/jwt/jwtGenerate'; 
 import { RegisterResponse} from '../interface/response/register'; 
 
@@ -136,5 +136,33 @@ const updateUser = async (req: any, res: Response<any>) => {
 
 };
 
+// Controller de mise à du mot de passe 
+const updateUserPassword = async (req: any, res: Response<any>) => {
+  try {
+    const updatedUserData: UserPasswordOnly = req.body;
+    const userId = req.user.userId;
 
-export { registerUser, loginUser, logoutUser, deleteUser, updateUser };
+    // Hash du nouveau mot de passe
+    const hashedPassword = await bcrypt.hash( updatedUserData.password,10)
+
+    // Mettre à jour le mot de passe de l'utilisateur en base données 
+    const userPasswordUpdate = await User.findByIdAndUpdate(userId, { password: hashedPassword });
+
+    
+   if(userPasswordUpdate){
+    res.status(200).send('Validé')
+
+  }else{
+    res.status(404).send('Utilisateur non trouvé')
+
+  }
+
+  } catch (error:any) {
+    console.error('Erreur lors de la mise à jour des informations du compte:', error.message);
+    res.status(500).send('Erreur serveur');
+  }
+
+};
+
+
+export { registerUser, loginUser, logoutUser, deleteUser, updateUser, updateUserPassword };

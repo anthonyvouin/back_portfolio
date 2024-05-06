@@ -1,5 +1,5 @@
 import express, { Router } from "express";
-import { registerUser, loginUser, logoutUser, deleteUser, updateUser} from "../controllers/auth.controller";
+import { registerUser, loginUser, logoutUser, deleteUser, updateUser, updateUserPassword} from "../controllers/auth.controller";
 import { jwtMiddleware } from "../middleware/jwtMiddleware";
 
 
@@ -11,6 +11,7 @@ router.post("/login",loginUser );
 router.post("/logout",jwtMiddleware, logoutUser);
 router.delete("/delete-account",jwtMiddleware, deleteUser);
 router.put("/update-account",jwtMiddleware, updateUser);
+router.put("/update-password",jwtMiddleware, updateUserPassword);
 
 
 export default router;
