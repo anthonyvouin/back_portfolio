@@ -108,7 +108,7 @@ const deleteUser = async (req: any, res: Response<any>) => {
 const updateUser = async (req: any, res: Response<any>) => {
   try {
     const updatedUserData: UserWithoutPwdandAdmin = req.body;
-    const userId = req.user.userId;
+    const userId:string = req.user.userId;
 
      // Vérifier si l'e-mail est déjà utilisé par un autre utilisateur
     const isEmailTaken = await User.findOne({ email: updatedUserData.email, _id: { $ne: userId } });
