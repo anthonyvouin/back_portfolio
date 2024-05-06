@@ -140,10 +140,10 @@ const updateUser = async (req: any, res: Response<any>) => {
 const updateUserPassword = async (req: any, res: Response<any>) => {
   try {
     const updatedUserData: UserPasswordOnly = req.body;
-    const userId = req.user.userId;
+    const userId: string = req.user.userId;
 
     // Hash du nouveau mot de passe
-    const hashedPassword = await bcrypt.hash( updatedUserData.password,10)
+    const hashedPassword:string = await bcrypt.hash( updatedUserData.password,10)
 
     // Mettre à jour le mot de passe de l'utilisateur en base données 
     const userPasswordUpdate = await User.findByIdAndUpdate(userId, { password: hashedPassword });
