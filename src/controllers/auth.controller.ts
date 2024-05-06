@@ -89,7 +89,7 @@ const logoutUser = async (req: Request<{}, {}, {}, {}>, res: Response<any>) => {
 };
 
 // Controller suppression du compte
-const deleteUser = async (req: JwtRequest, res: Response<any>) => {
+const deleteUser = async (req: JwtRequest, res: Response<any>, next: NextFunction) => {
   try {
     // Obtenez l'ID de l'utilisateur à partir du JWT vérifié
     const userId = req.userId;
