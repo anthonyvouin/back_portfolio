@@ -6,6 +6,8 @@ import { secretKey } from '../../config/db.config';
 import { UserProps } from '../interface/user'; 
 import { JwtData } from '../interface/jwt'; 
 import { RegisterResponse} from '../interface/register'; 
+import { UserCredentials} from '../interface/UserCredentials'; 
+
 
 
 // Fonction pour générer le token JWT
@@ -50,15 +52,16 @@ const registerUser = async (req: Request<any, any, UserProps, any>, res: Respons
 // Controller Connexion
 const loginUser = async (req: Request<any, any, any, any>, res: Response<RegisterResponse>) => {
   try {
-    const { email, password } = req.body;
 
-    const user: UserDocument | null = await User.findOne({ email });
+    const credentials: UserCredentials = req.body;
+
+    const user: UserDocument | null = await User.findOne({email: credentials.email });
 
     if (!user) {
       return res.status(401).json({ message: 'Adresse e-mail ou mot de passe incorrect.' });
     }
 
-    const isPasswordValid: boolean = await bcrypt.compare(password, user.password);
+    const isPasswordValid: boolean = await bcrypt.compare(credentials.password, user.password);
 
     if (!isPasswordValid) {
       return res.status(401).json({ message: 'Adresse e-mail ou mot de passe incorrect.' });
