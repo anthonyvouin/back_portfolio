@@ -78,5 +78,15 @@ const loginUser = async (req: Request<any, any, any, any>, res: Response<Registe
   }
 };
 
+// Controller Deconnexion 
+const logoutUser = async (req: Request<{}, {}, {}, {}>, res: Response<any>) => {
+  try {
+    res.json({ message: 'Déconnexion réussie' });
+  } catch (error:any) {
+    console.error('Erreur lors de la déconnexion:', error.message);
+    res.status(500).send('Erreur serveur');
+  }
+};
 
-export { registerUser, loginUser };
+
+export { registerUser, loginUser, logoutUser };
