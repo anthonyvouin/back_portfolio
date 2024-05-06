@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 import { Request, Response, NextFunction } from 'express';
 import  { UserDocument, User } from '../models/user.model'; // Import de UserDocument depuis le fichier user.model.ts
 import { secretKey } from '../../config/db.config';
-import { UserProps, UserCredential} from '../interface/auth/user'; 
+import { UserProps, UserCredential, UserWithoutPwdandAdmin} from '../interface/auth/user'; 
 import { GenerateToken } from '../interface/jwt/jwtGenerate'; 
 import { RegisterResponse} from '../interface/response/register'; 
 
@@ -105,6 +105,36 @@ const deleteUser = async (req: any, res: Response<any>) => {
 };
 
 // Controller de mise à jour des informations du compte
+const updateUser = async (req: any, res: Response<any>) => {
+  try {
+    const updatedUserData: UserWithoutPwdandAdmin = req.body;
+    const userId = req.user.userId;
+
+     // Vérifier si l'e-mail est déjà utilisé par un autre utilisateur
+    const isEmailTaken = await User.findOne({ email: updatedUserData.email, _id: { $ne: userId } });
+     if (isEmailTaken) {
+        return res.status(400).json({ message: 'Cette adresse e-mail est déjà utilisée par un autre utilisateur.' });
+    }
+
+    //mettre à jour les informations de l'utilisateur dans la base de données
+    const data: UserDocument | null = await User.findByIdAndUpdate(
+     userId,
+     updatedUserData,      
+   
+    );
+
+    if (!data) {
+      return res.status(404).json({ message: 'Utilisateur non trouvé.' });
+    }
+
+    res.json( data );
+
+  } catch (error:any) {
+    console.error('Erreur lors de la mise à jour des informations du compte:', error.message);
+    res.status(500).send('Erreur serveur');
+  }
+
+};
 
 
-export { registerUser, loginUser, logoutUser, deleteUser };
+export { registerUser, loginUser, logoutUser, deleteUser, updateUser };
