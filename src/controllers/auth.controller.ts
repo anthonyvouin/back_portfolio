@@ -3,11 +3,11 @@ import jwt from 'jsonwebtoken';
 import { Request, Response, NextFunction } from 'express';
 import  { UserDocument, User } from '../models/user.model'; // Import de UserDocument depuis le fichier user.model.ts
 import { secretKey } from '../../config/db.config';
-import { UserProps } from '../interface/user'; 
-import { GenerateToken } from '../interface/jwtGenerate'; 
-import { RegisterResponse} from '../interface/register'; 
-import { UserCredentials} from '../interface/userCredentials'; 
-import { JwtRequest } from '../interface/jwtRequest';
+import { UserProps } from '../interface/auth/user'; 
+import { GenerateToken } from '../interface/jwt/jwtGenerate'; 
+import { RegisterResponse} from '../interface/response/register'; 
+import { UserCredentials} from '../interface/auth/userCredentials'; 
+import { JwtRequest } from '../interface/jwt/jwtRequest';
 
 
 // Fonction pour générer le token JWT
@@ -92,7 +92,7 @@ const logoutUser = async (req: Request<{}, {}, {}, {}>, res: Response<any>) => {
 const deleteUser = async (req: any, res: Response<any>, next: NextFunction) => {
   try {
     // Obtenez l'ID de l'utilisateur à partir du JWT vérifié
-    const userId = req.user.userId;
+    const userId:string = req.user.userId;
 
     // Supprimez l'utilisateur de la base de données
     await User.findByIdAndDelete(userId);

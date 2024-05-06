@@ -1,5 +1,5 @@
 import mongoose, { Document, Schema, Model } from 'mongoose';
-import { UserProps } from '../interface/user';
+import { UserProps } from '../interface/auth/user';
 // Interface décrivant les propriétés d'un utilisateur
 
 
