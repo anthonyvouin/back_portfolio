@@ -48,5 +48,32 @@ const registerUser = async (req: Request<any, any, UserProps, any>, res: Respons
 };
 
 // Controller Connexion
+const loginUser = async (req: Request<any, any, any, any>, res: Response<RegisterResponse>) => {
+  try {
+    const { email, password } = req.body;
 
-export default{ registerUser };
+    const user: UserDocument | null = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(401).json({ message: 'Adresse e-mail ou mot de passe incorrect.' });
+    }
+
+    const isPasswordValid: boolean = await bcrypt.compare(password, user.password);
+
+    if (!isPasswordValid) {
+      return res.status(401).json({ message: 'Adresse e-mail ou mot de passe incorrect.' });
+    }
+
+    const tokenData: JwtData = { email: user.email, userId: user._id };
+    const token: string = generateToken(tokenData);
+
+    const response: RegisterResponse = { message: 'Connexion réussie', token };
+    res.json(response);
+  } catch (error:any) {
+    console.error('Erreur lors de la connexion:', error.message);
+    res.status(500).send({message:'Erreur serveur'});
+  }
+};
+
+
+export { registerUser, loginUser };
