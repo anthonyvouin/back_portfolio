@@ -1,7 +1,6 @@
 // src/middleware/jwtMiddleware.ts
 import jwt, { JwtPayload } from 'jsonwebtoken';
 import { secretKey } from '../../config/db.config';
-
 import {  Response, NextFunction } from 'express';
 
 

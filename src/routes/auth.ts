@@ -8,7 +8,8 @@ const router: Router = express.Router();
 router.post("/register",registerUser );
 router.post("/login",loginUser );
 router.post("/logout",jwtMiddleware, logoutUser);
-router.delete("/delete-account", jwtMiddleware, deleteUser )
+router.delete("/delete-account",jwtMiddleware, deleteUser);
+
 
 
 export default router;

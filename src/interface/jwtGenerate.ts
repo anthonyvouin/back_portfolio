@@ -1,4 +1,4 @@
-export interface JwtData {
+export interface GenerateToken {
     email: string;
     userId: string;
   }
