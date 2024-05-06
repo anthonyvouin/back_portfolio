@@ -13,6 +13,6 @@ export interface UserProps {
 
   export interface UserWithoutPwdandAdmin extends Omit< UserProps, 'password'| 'isAdmin' > { }
 
-  export interface UserCredential extends Omit< UserProps, 'firstName'| 'lastName' | 'isAdmin' > { }
+  export interface UserCredential extends Pick< UserProps, 'email' | 'password' > { } 
 
   export interface UserPasswordOnly extends Pick < UserProps, 'password' > { }
