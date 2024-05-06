@@ -1,12 +1,14 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import { Request, Response } from 'express';
+import { Request, Response, NextFunction } from 'express';
 import  { UserDocument, User } from '../models/user.model'; // Import de UserDocument depuis le fichier user.model.ts
 import { secretKey } from '../../config/db.config';
 import { UserProps } from '../interface/user'; 
 import { JwtData } from '../interface/jwt'; 
 import { RegisterResponse} from '../interface/register'; 
-import { UserCredentials} from '../interface/UserCredentials'; 
+import { UserCredentials} from '../interface/userCredentials'; 
+import { AuthenticatedRequest } from '../interface/authRequest';
+
 
 
 
@@ -88,5 +90,17 @@ const logoutUser = async (req: Request<{}, {}, {}, {}>, res: Response<any>) => {
   }
 };
 
+// Controller Suppresion Compte
+const deleteUser = async (req: Request, res: Response) => {
+  try {
+    const userId: string = (req as AuthenticatedRequest).user.userId; // Utilisez l'interface AuthenticatedRequest ici
+    await User.findByIdAndDelete(userId);
+    res.json({ message: 'Compte supprimé avec succès.' });
+  } catch (error:any) {
+    console.error('Erreur lors de la suppression du compte:', error.message);
+    res.status(500).send('Erreur serveur');
+  }
+};
 
-export { registerUser, loginUser, logoutUser };
+
+export { registerUser, loginUser, logoutUser, deleteUser };
