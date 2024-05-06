@@ -3,11 +3,10 @@ import jwt from 'jsonwebtoken';
 import { Request, Response, NextFunction } from 'express';
 import  { UserDocument, User } from '../models/user.model'; // Import de UserDocument depuis le fichier user.model.ts
 import { secretKey } from '../../config/db.config';
-import { UserProps } from '../interface/auth/user'; 
+import { UserProps, UserCredential} from '../interface/auth/user'; 
 import { GenerateToken } from '../interface/jwt/jwtGenerate'; 
 import { RegisterResponse} from '../interface/response/register'; 
-import { UserCredentials} from '../interface/auth/userCredentials'; 
-import { JwtRequest } from '../interface/jwt/jwtRequest';
+
 
 
 // Fonction pour générer le token JWT
@@ -53,7 +52,7 @@ const registerUser = async (req: Request<any, any, UserProps, any>, res: Respons
 const loginUser = async (req: Request<any, any, any, any>, res: Response<RegisterResponse>) => {
   try {
 
-    const credentials: UserCredentials = req.body;
+    const credentials: UserCredential = req.body;
 
     const user: UserDocument | null = await User.findOne({email: credentials.email });
 
@@ -106,5 +105,6 @@ const deleteUser = async (req: any, res: Response<any>, next: NextFunction) => {
 };
 
 // Controller de mise à jour des informations du compte
+
 
 export { registerUser, loginUser, logoutUser, deleteUser };
