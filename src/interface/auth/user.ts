@@ -8,7 +8,9 @@ export interface UserProps {
 
   
 
-// Je vire ce que je veux pas grace au omit
+// Omit, je prend mon interface, puis je retire des champs
+// Pick, je prend UserProps, puis je lui précise ensuite les champs que je souhaite avoir
+
   export interface UserWithoutPwdandAdmin extends Omit< UserProps, 'password'| 'isAdmin' > { }
 
   export interface UserCredential extends Omit< UserProps, 'firstName'| 'lastName' | 'isAdmin' > { }
