@@ -4,6 +4,7 @@ import cors from 'cors';
 import testRoute from './src/routes/test';
 import authRoute from './src/routes/auth';
 import connectDB from './config/db.config';
+import adminRoute from './src/routes/admin';
 
 // Serveur
 const app: Express = express();
@@ -19,7 +20,7 @@ app.use(cors());
 //Appel route
 app.use('/test', testRoute);
 app.use('/auth', authRoute);
-
+app.use('/admin', adminRoute)
 
 
 app.listen(port, () => {
