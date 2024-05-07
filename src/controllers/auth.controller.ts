@@ -120,6 +120,8 @@ const updateUser = async (req: any, res: Response<any>) => {
     const data: UserDocument | null = await User.findByIdAndUpdate(
      userId,
      updatedUserData,      
+     { new: true } // Pour renvoyer les données mises à jour
+
    
     );
 
