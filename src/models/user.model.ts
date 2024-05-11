@@ -1,12 +1,13 @@
 import mongoose, { Document, Schema, Model } from 'mongoose';
 import { UserProps } from '../interface/auth/user';
-// Interface décrivant les propriétés d'un utilisateur
 
 
-// Interface décrivant un document utilisateur dans MongoDB
+
+// Interface décrivant un document utilisateur dans MongoDB, étendant les propriétés d'utilisateur et Document de Mongoose
 export interface UserDocument extends UserProps, Document {}
 
-// Interface décrivant le modèle utilisateur
+
+// Interface décrivant le modèle utilisateur, étendant le modèle de Mongoose avec le type UserDocument
 interface UserModel extends Model<UserDocument> {}
 
 // Schéma de l'utilisateur
@@ -17,6 +18,7 @@ const userSchema = new Schema<UserDocument, UserModel>({
   password: { type: String, required: true }, 
   isAdmin: { type: Boolean, default: false },
 });
+
 
 // Modèle utilisateur
 const User = mongoose.model<UserDocument, UserModel>('User', userSchema);
