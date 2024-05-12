@@ -49,7 +49,7 @@ const registerUser = async (req: Request<any, any, UserProps, any>, res: Respons
 };
 
 // Controller Connexion
-const loginUser = async (req: Request<any, any, any, any>, res: Response<RegisterResponse>) => {
+const loginUser = async (req: Request<any, any, UserCredential, any>, res: Response<RegisterResponse>) => {
   try {
 
     const credentials: UserCredential = req.body;
@@ -78,7 +78,7 @@ const loginUser = async (req: Request<any, any, any, any>, res: Response<Registe
 };
 
 // Controller Deconnexion 
-const logoutUser = async (req: Request<{}, {}, {}, {}>, res: Response<any>) => {
+const logoutUser = async (req: any, res: Response<any>) => {
   try {
     res.json({ message: 'Déconnexion réussie' });
   } catch (error:any) {
