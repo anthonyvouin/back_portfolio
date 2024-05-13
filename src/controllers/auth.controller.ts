@@ -78,7 +78,6 @@ const loginUser = async (req: Request<any, any, UserCredential, any>, res: Respo
 };
 
 
-
 // Controller suppression du compte
 const deleteUser = async (req: any, res: Response<any>) => {
   try {
@@ -143,13 +142,11 @@ const updateUserPassword = async (req: any, res: Response<any>) => {
     const userPasswordUpdate = await User.findByIdAndUpdate(userId, { password: hashedPassword });
 
     
-   if(userPasswordUpdate){
-    res.status(200).send('Validé')
-
-  }else{
-    res.status(404).send('Utilisateur non trouvé')
-
-  }
+    if (userPasswordUpdate) {
+      res.status(200).json({ message: 'Validé' });
+    } else {
+      res.status(404).json({ message: 'Utilisateur non trouvé' });
+    }
 
   } catch (error:any) {
     console.error('Erreur lors de la mise à jour des informations du compte:', error.message);
