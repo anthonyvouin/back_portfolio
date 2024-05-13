@@ -77,15 +77,7 @@ const loginUser = async (req: Request<any, any, UserCredential, any>, res: Respo
   }
 };
 
-// Controller Deconnexion 
-const logoutUser = async (req: any, res: Response<any>) => {
-  try {
-    res.json({ message: 'Déconnexion réussie' });
-  } catch (error:any) {
-    console.error('Erreur lors de la déconnexion:', error.message);
-    res.status(500).send('Erreur serveur');
-  }
-};
+
 
 // Controller suppression du compte
 const deleteUser = async (req: any, res: Response<any>) => {
@@ -167,4 +159,4 @@ const updateUserPassword = async (req: any, res: Response<any>) => {
 };
 
 
-export { registerUser, loginUser, logoutUser, deleteUser, updateUser, updateUserPassword };
+export { registerUser, loginUser, deleteUser, updateUser, updateUserPassword };
