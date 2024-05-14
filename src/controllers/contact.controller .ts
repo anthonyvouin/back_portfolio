@@ -8,8 +8,8 @@ export const createContact = async (req: Request<any, any, ContactProps, any>, r
     const contactData: ContactProps = req.body;
 
     const newContact: ContactDocument = new Contact({
-      nom: contactData.nom,
-      prenom: contactData.prenom,
+      firstName: contactData.firstName,
+      lastName: contactData.lastName,
       email: contactData.email,
       objet: contactData.objet,
       message: contactData.message,
