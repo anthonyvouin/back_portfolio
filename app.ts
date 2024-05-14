@@ -5,6 +5,8 @@ import testRoute from './src/routes/test';
 import authRoute from './src/routes/auth';
 import connectDB from './config/db.config';
 import adminRoute from './src/routes/admin';
+import contactRoute from './src/routes/contact';
+
 
 // Serveur
 const app: Express = express();
@@ -21,7 +23,7 @@ app.use(cors());
 app.use('/test', testRoute);
 app.use('/auth', authRoute);
 app.use('/admin', adminRoute)
-
+app.use('/contact', contactRoute)
 
 app.listen(port, () => {
   console.log(`Le serveur écoute sur le port ${port}`);
