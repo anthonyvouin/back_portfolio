@@ -15,6 +15,7 @@ const connectDB = async () => {
     console.error('Erreur de connexion à la base de données:', error.message);
     process.exit(1);
   }
+  
 };
 
 export default connectDB;
