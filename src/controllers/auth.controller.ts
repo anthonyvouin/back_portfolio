@@ -34,6 +34,7 @@ const registerUser = async (req: Request<any, any, UserProps, any>, res: Respons
       email: userData.email,
       password: hashedPassword,
       isAdmin: false,
+
     });
 
     await newUser.save();
