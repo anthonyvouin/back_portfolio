@@ -10,7 +10,7 @@ const router: Router = express.Router();
 
 
 
-router.post("/",  upload.single('image'),  validateProjetData,jwtMiddleware, adminMiddleware, createProjet);
+router.post("/",  upload.single('image'),  validateProjetData, jwtMiddleware, adminMiddleware, createProjet);
 
 
 export default router;
