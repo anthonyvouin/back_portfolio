@@ -7,6 +7,8 @@ import connectDB from './config/db.config';
 import adminRoute from './src/routes/admin';
 import contactRoute from './src/routes/contact';
 import categoryRoute from './src/routes/category';
+import projetRoute from './src/routes/projet';
+
 
 
 
@@ -27,6 +29,8 @@ app.use('/auth', authRoute);
 app.use('/admin', adminRoute)
 app.use('/contact', contactRoute)
 app.use('/category', categoryRoute)
+app.use('/projet', projetRoute)
+
 
 app.listen(port, () => {
   console.log(`Le serveur écoute sur le port ${port}`);
