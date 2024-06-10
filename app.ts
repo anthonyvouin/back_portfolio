@@ -11,7 +11,6 @@ import projetRoute from './src/routes/projet';
 
 
 
-
 // Serveur
 const app: Express = express();
 const port:number = 3000;
@@ -22,6 +21,9 @@ connectDB()
 // Utilisation de bodyParser pour parser le corps des requêtes en JSON
 app.use(bodyParser.json());
 app.use(cors());
+
+// Middleware pour servir les fichiers statiques du dossier 'uploads'
+app.use("/src/uploads", express.static("src/uploads"));
 
 //Appel route
 app.use('/test', testRoute);

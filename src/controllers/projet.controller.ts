@@ -13,7 +13,10 @@ export const createProjet = async (req: Request, res: Response) => {
     if (!categoryExists) {
       return res.status(400).json({ message: 'Catégorie non trouvée' });
     }
-
+    if (req.file) {
+      projectData.image = req.file.path
+    }
+    
     const newProject = new Projet({
       ...projectData,
       date: projectData.date,

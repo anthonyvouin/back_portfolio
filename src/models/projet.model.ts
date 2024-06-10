@@ -13,6 +13,7 @@ const projectSchema = new Schema<ProjetDocument, ProjetModel>({
     description: { type: String, required: true },
     explanation: { type: String, required: true },
     category: { type: mongoose.Schema.Types.ObjectId, ref: 'Category', required: true }, // Référence à l'ID de la catégorie
+    image : { type: String, required: true },
     date: { type: Date, default: Date.now }
 });
 
