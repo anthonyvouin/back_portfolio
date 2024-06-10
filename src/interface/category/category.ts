@@ -1,4 +1,3 @@
-export interface CategoryProps {
-   
+export interface CategoryProps {   
     name: string;
 }

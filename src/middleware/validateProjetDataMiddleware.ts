@@ -8,7 +8,7 @@ export const validateProjetData = (req: Request, res: Response, next: NextFuncti
   // Vérifiez que toutes les données nécessaires sont présentes
   if (!projectData.title || !projectData.description || !projectData.explanation || !projectData.category || !req.file) {
     if (req.file) {
-      // Supprimez l'image téléchargée en cas d'erreur
+      //Supprimez l'image téléchargée en cas d'erreur
       fs.unlink(req.file.path, (err) => {
         if (err) {
           console.error('Erreur lors de la suppression du fichier :', err);

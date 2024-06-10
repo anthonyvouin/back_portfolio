@@ -8,7 +8,6 @@ export const createProjet = async (req: Request, res: Response) => {
   try {
     const projectData: ProjetProps = req.body;
 
-    // Vérifiez que la catégorie existe
     const categoryExists = await Category.exists({ _id: projectData.category });
     if (!categoryExists) {
       return res.status(400).json({ message: 'Catégorie non trouvée' });
@@ -26,7 +25,21 @@ export const createProjet = async (req: Request, res: Response) => {
 
     res.status(201).json({ message: 'Projet créé avec succès !' });
   } catch (error:any) {
-    console.error('Erreur lors de la création du projet:', error.message);
+    console.error('Erreur lors de la création du projet:', error.message);    
     res.status(500).json({ message: 'Erreur serveur' });
+     
   }
 };
+
+
+
+
+
+
+
+
+
+
+
+
+

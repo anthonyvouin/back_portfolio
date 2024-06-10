@@ -31,3 +31,20 @@ export const getAllCategory = async (req: Request, res: Response) => {
   }
 };
 
+export const deleteCategoryById = async (req: Request<{ id: string }>, res: Response) => {
+  try {
+    const { id } = req.params;
+
+    const deletedCategory = await Category.findByIdAndDelete(id);
+
+    if (!deletedCategory) {
+      return res.status(404).json({ message: 'Category non trouvée' });
+    }
+
+    res.status(200).json({ message: 'Category supprimée avec succès' });
+  } catch (error: any) {
+    
+    console.error('Erreur lors de la suppression de la catégorie:', error.message);
+    res.status(500).json({ message: 'Erreur serveur' });
+  }
+};
