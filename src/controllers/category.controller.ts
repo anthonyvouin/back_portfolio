@@ -21,6 +21,26 @@ export const createCategory = async (req: Request<any, any, CategoryProps, any>,
   }
 };
 
+export const updateCategoryById = async (req: Request<{ id: string }, any, CategoryProps, any>, res: Response) => {
+  try {
+    const { id } = req.params;
+    const categoryData: CategoryProps = req.body;
+
+    const updatedCategory: CategoryDocument | null = await Category.findByIdAndUpdate(id, categoryData, {
+      new: true,
+    });
+
+    if (!updatedCategory) {
+      return res.status(404).json({ message: 'Catégorie non trouvée' });
+    }
+
+    res.status(200).json({ message: 'Catégorie mise à jour avec succès', updatedCategory });
+  } catch (error: any) {
+    console.error('Erreur lors de la mise à jour de la catégorie:', error.message);
+    res.status(500).json({ message: 'Erreur serveur' });
+  }
+};
+
 export const getAllCategory = async (req: Request, res: Response) => {
   try {
     const categories = await Category.find();
