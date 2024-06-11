@@ -43,6 +43,7 @@ const registerUser = async (req: Request<any, any, UserProps, any>, res: Respons
   }
 };
 
+
 // Controller Connexion
 const loginUser = async (req: Request<any, any, UserCredential, any>, res: Response<RegisterResponse>) => {
   try {
