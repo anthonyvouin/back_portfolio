@@ -4,15 +4,10 @@ import { Request, Response, NextFunction } from 'express';
 import  { UserDocument, User } from '../models/user.model'; // Import de UserDocument depuis le fichier user.model.ts
 import { secretKey } from '../../config/db.config';
 import { UserProps, UserCredential, UserWithoutPwdandAdmin, UserPasswordOnly} from '../interface/auth/user'; 
-import { GenerateToken } from '../interface/jwt/jwtGenerate'; 
 import { RegisterResponse} from '../interface/response/register'; 
+import { generateToken } from '../middleware/jwtMiddleware';
 
 
-
-// Fonction pour générer le token JWT
-const generateToken = (userData: GenerateToken): string => {
-  return jwt.sign(userData, secretKey, { expiresIn: '1h' });
-};
 
 
 // Controller inscription 
@@ -66,9 +61,9 @@ const loginUser = async (req: Request<any, any, UserCredential, any>, res: Respo
     if (!isPasswordValid) {
       return res.status(401).json({ message: 'Adresse e-mail ou mot de passe incorrect.' });
     }
+    
+    const token: string = generateToken({ email: user.email, userId: user._id, isAdmin: user.isAdmin! });
 
-    const tokenData: GenerateToken = { email: user.email, userId: user._id , isAdmin: user.isAdmin!};
-    const token: string = generateToken(tokenData);
 
     const response: RegisterResponse = { message: 'Connexion réussie', token };
     res.json(response);
