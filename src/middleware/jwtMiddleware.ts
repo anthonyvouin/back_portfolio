@@ -2,10 +2,10 @@
 import jwt, { JwtPayload } from 'jsonwebtoken';
 import { secretKey } from '../../config/db.config';
 import {  Response, NextFunction } from 'express';
-
+import { jwtgenerate } from '../interface/jwt/jwt';
 
 // Fonction pour générer un token JWT
-export const generateToken = (userData: any): string => {
+export const generateToken = (userData: jwtgenerate): string => {
   return jwt.sign(userData, secretKey!, { expiresIn: '1h' });
 };
 
