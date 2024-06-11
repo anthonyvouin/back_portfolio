@@ -1,8 +1,10 @@
 import { Request, Response } from 'express';
 import {  CategoryDocument, Category}  from '../models/category.model';
 import { CategoryProps }  from '../interface/category/category';
+import { RegisterResponse} from '../interface/response/register'; 
 
-export const createCategory = async (req: Request<any, any, CategoryProps, any>, res: Response<any>) => {
+
+export const createCategory = async (req: Request<any, any, CategoryProps, any>,  res: Response<RegisterResponse>) => {
   try {
     const categoryData: CategoryProps = req.body;
 

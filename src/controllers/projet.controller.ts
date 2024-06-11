@@ -2,9 +2,10 @@ import { Request, Response } from 'express';
 import { Projet } from '../models/projet.model';
 import { ProjetProps } from '../interface/projet/projet';
 import {  Category}  from '../models/category.model';
+import { RegisterResponse} from '../interface/response/register'; 
 
 
-export const createProjet = async (req: Request, res: Response) => {
+export const createProjet = async (req: Request<any, any, ProjetProps, any>, res: Response<any>) => {
   try {
     const projectData: ProjetProps = req.body;
 
