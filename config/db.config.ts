@@ -6,7 +6,8 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 // Clé secrète pour JWT
-export const secretKey:string = 'votre_clé_secrète';
+export const secretKey =  process.env.SECRET_KEY_JWT;
+
 
 //Connexion à la base de données 
 const connectDB = async () => {

@@ -6,7 +6,7 @@ import {  Response, NextFunction } from 'express';
 
 // Fonction pour générer un token JWT
 export const generateToken = (userData: any): string => {
-  return jwt.sign(userData, secretKey, { expiresIn: '1h' });
+  return jwt.sign(userData, secretKey!, { expiresIn: '1h' });
 };
 
 
@@ -22,7 +22,7 @@ export const jwtMiddleware = (req: any, res: Response, next: NextFunction):Respo
 
   try {
     // Vérifier le token
-    const decoded: JwtPayload = jwt.verify(token, secretKey) as JwtPayload;
+    const decoded: JwtPayload = jwt.verify(token, secretKey!) as JwtPayload;
     req.user = decoded;
     next();
   } catch (error) {
