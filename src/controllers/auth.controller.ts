@@ -39,7 +39,7 @@ const registerUser = async (req: Request<any, any, UserProps, any>, res: Respons
 
     await newUser.save();
 
-    const token: string = generateToken({ email: newUser.email, userId: newUser._id });
+    const token: string = generateToken({ email: newUser.email, userId: newUser._id, isAdmin:false });
 
     const response: RegisterResponse = { message: 'Compte créé avec succès !', token };
     res.json(response);
@@ -67,7 +67,7 @@ const loginUser = async (req: Request<any, any, UserCredential, any>, res: Respo
       return res.status(401).json({ message: 'Adresse e-mail ou mot de passe incorrect.' });
     }
 
-    const tokenData: GenerateToken = { email: user.email, userId: user._id };
+    const tokenData: GenerateToken = { email: user.email, userId: user._id , isAdmin: user.isAdmin!};
     const token: string = generateToken(tokenData);
 
     const response: RegisterResponse = { message: 'Connexion réussie', token };
