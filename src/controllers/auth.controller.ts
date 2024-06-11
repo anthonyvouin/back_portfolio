@@ -2,7 +2,6 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { Request, Response, NextFunction } from 'express';
 import  { UserDocument, User } from '../models/user.model'; // Import de UserDocument depuis le fichier user.model.ts
-import { secretKey } from '../../config/db.config';
 import { UserProps, UserCredential, UserWithoutPwdandAdmin, UserPasswordOnly} from '../interface/auth/user'; 
 import { RegisterResponse} from '../interface/response/register'; 
 import { generateToken } from '../middleware/jwtMiddleware';
@@ -34,7 +33,7 @@ const registerUser = async (req: Request<any, any, UserProps, any>, res: Respons
 
     await newUser.save();
 
-    const token: string = generateToken({ email: newUser.email, userId: newUser._id, isAdmin:false });
+    const token: string = generateToken({ email: newUser.email, userId: newUser._id, isAdmin:false});
 
     const response: RegisterResponse = { message: 'Compte créé avec succès !', token };
     res.json(response);
@@ -61,7 +60,7 @@ const loginUser = async (req: Request<any, any, UserCredential, any>, res: Respo
     if (!isPasswordValid) {
       return res.status(401).json({ message: 'Adresse e-mail ou mot de passe incorrect.' });
     }
-    
+
     const token: string = generateToken({ email: user.email, userId: user._id, isAdmin: user.isAdmin! });
 
 
