@@ -6,6 +6,18 @@ export const createCategory = async (req: Request<any, any, CategoryProps, any>,
   try {
     const categoryData: CategoryProps = req.body;
 
+    // Validation des données
+    if (!categoryData.name) {
+      return res.status(400).json({ message: 'Le titre est requis.' });
+    }
+
+    // Vérification si la catégorie existe déjà
+    const existingCategory = await Category.findOne({ name: categoryData.name});
+    if (existingCategory) {
+      return res.status(400).json({ message: 'Une catégorie avec ce titre existe déjà.' });
+    }
+
+
     const newcategory: CategoryDocument = new Category({     
       ...categoryData,
    
@@ -24,7 +36,20 @@ export const createCategory = async (req: Request<any, any, CategoryProps, any>,
 export const updateCategoryById = async (req: Request<{ id: string }, any, CategoryProps, any>, res: Response) => {
   try {
     const { id } = req.params;
+
     const categoryData: CategoryProps = req.body;
+
+     // Validation des données
+     if (!categoryData.name) {
+      return res.status(400).json({ message: 'Le titre est requis.' });
+    }
+
+    // Vérification si la catégorie existe déjà
+    const existingCategory = await Category.findOne({ name: categoryData.name});
+    if (existingCategory) {
+      return res.status(400).json({ message: 'Une catégorie avec ce titre existe déjà.' });
+    }
+    
 
     const updatedCategory: CategoryDocument | null = await Category.findByIdAndUpdate(id, categoryData, {
       new: true,
