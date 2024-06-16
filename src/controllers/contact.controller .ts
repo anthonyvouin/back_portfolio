@@ -2,8 +2,9 @@ import { Request, Response } from 'express';
 import {  ContactDocument, Contact }  from '../models/contact.model';
 import { ContactProps }  from '../interface/contact/contact';
 import { sendEmail } from '../services/mail';
+import { RegisterResponse} from '../interface/response/register'; 
 
-export const createContact = async (req: Request<any, any, ContactProps, any>, res: Response<any>) => {
+export const createContact = async (req: Request<any, any, ContactProps, any>, res: Response<RegisterResponse>) => {
   try {
     const contactData: ContactProps = req.body;
 
