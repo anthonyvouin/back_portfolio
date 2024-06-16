@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import { ProjetProps } from '../interface/projet/projet';
 import fs from 'fs';
 
-export const validateProjetData = (req: Request, res: Response, next: NextFunction) => {
+export const validateProjetData = (req: Request<any, any, ProjetProps, any>, res: Response<any>, next: NextFunction) => {
   const projectData: ProjetProps = req.body;
 
   // Vérifiez que toutes les données nécessaires sont présentes
