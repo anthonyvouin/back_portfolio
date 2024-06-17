@@ -34,7 +34,7 @@ export const createProjet = async (req: Request<any, any, ProjetProps, any>, res
 
 export const getAllProjets = async (req: Request, res: Response) => {
   try {
-    const projets = await Projet.find(); 
+    const projets = await Projet.find().populate('category', 'name') 
 
     res.status(200).json(projets); 
   } catch (error: any) {
