@@ -32,7 +32,16 @@ export const createProjet = async (req: Request<any, any, ProjetProps, any>, res
   }
 };
 
+export const getAllProjets = async (req: Request, res: Response) => {
+  try {
+    const projets = await Projet.find(); 
 
+    res.status(200).json(projets); 
+  } catch (error: any) {
+    console.error('Erreur lors de la récupération des projets :', error.message);
+    res.status(500).json({ message: 'Erreur serveur' });
+  }
+};
 
 
 
