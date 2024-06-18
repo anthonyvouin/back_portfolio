@@ -1,5 +1,4 @@
 import  express ,{ Request, Response, Express } from 'express';
-import bodyParser from 'body-parser';
 import cors from 'cors'; 
 import testRoute from './src/routes/test';
 import authRoute from './src/routes/auth';
@@ -20,7 +19,7 @@ const port:number = 3000;
 connectDB()
 
 // Utilisation de bodyParser pour parser le corps des requêtes en JSON
-app.use(bodyParser.json());
+app.use(express.json());
 app.use(cors());
 
 // Middleware pour servir les fichiers statiques du dossier 'uploads'
