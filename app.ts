@@ -18,7 +18,7 @@ const port:number = 3000;
 // Connexion à la base de données
 connectDB()
 
-// Utilisation de bodyParser pour parser le corps des requêtes en JSON
+// Utilisation de express json pour parser le corps des requêtes en JSON
 app.use(express.json());
 app.use(cors());
 
