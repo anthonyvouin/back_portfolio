@@ -42,7 +42,8 @@ const fileFilter = (req: any, file: any, cb: any) => {
 // Configuration de multer avec les options de stockage et de filtrage
 const upload: Multer = multer({ 
   storage, 
-  fileFilter 
+  fileFilter ,
+  
 });
 
 export default upload;
