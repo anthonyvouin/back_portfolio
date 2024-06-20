@@ -3,16 +3,24 @@ import { Projet } from '../models/projet.model';
 import { ProjetProps } from '../interface/projet/projet';
 import {  Category}  from '../models/category.model';
 import { RegisterResponse} from '../interface/response/register'; 
+import mongoose from 'mongoose';
 
 
 export const createProjet = async (req: Request<any, any, ProjetProps, any>, res: Response<any>) => {
   try {
     const projectData: ProjetProps = req.body;
 
-    const categoryExists = await Category.exists({ _id: projectData.category });
-    if (!categoryExists) {
-      return res.status(400).json({ message: 'Catégorie non trouvée' });
-    }
+
+       // Vérifiez que l'ID de la catégorie est valide
+       if (!mongoose.Types.ObjectId.isValid(projectData.category)) {
+        return res.status(400).json({ message: 'ID de catégorie invalide' });
+      }
+  
+      const categoryExists = await Category.exists({ _id: projectData.category });
+      if (!categoryExists) {
+        return res.status(400).json({ message: 'Catégorie non trouvée' });
+      }
+
     if (req.file) {
       projectData.image = req.file.path
     }
