@@ -2,4 +2,3 @@ node_modules/
 build/
 config/db.config.ts
 .env
-src/uploads
