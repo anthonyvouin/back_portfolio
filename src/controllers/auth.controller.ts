@@ -75,7 +75,7 @@ const loginUser = async (req: Request<any, any, UserCredential, any>, res: Respo
 
 
 // Controller suppression du compte
-const deleteUser = async (req: any, res: Response<any>) => {
+const deleteUser = async (req: any, res: Response<RegisterResponse>) => {
   try {
     // Obtenez l'ID de l'utilisateur à partir du JWT vérifié
     const userId:string = req.user.userId;
@@ -86,7 +86,7 @@ const deleteUser = async (req: any, res: Response<any>) => {
     res.json({ message: 'Compte supprimé avec succès.' });
   } catch (error:any) {
     console.error('Erreur lors de la suppression du compte:', error.message);
-    res.status(500).send('Erreur serveur');
+    res.status(500).send({message:'Erreur serveur'});
   }
 
 };
