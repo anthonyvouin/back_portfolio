@@ -39,7 +39,9 @@ app.use('/contact', contactRoute)
 app.use('/category', categoryRoute)
 app.use('/projet', projetRoute )
 
-
+app.get('/', (req, res) => {
+  res.send('Hello, TypeScript!');
+});
 
 app.listen(port, () => {
   console.log(`Le serveur écoute sur le port ${port}`);
