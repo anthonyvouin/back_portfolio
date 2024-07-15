@@ -32,14 +32,14 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/src/uploads", express.static("src/uploads"));
 
 //Appel route
-app.use('/test', testRoute );
-app.use('/auth', authRoute);
-app.use('/admin', adminRoute)
-app.use('/contact', contactRoute)
-app.use('/category', categoryRoute)
-app.use('/projet', projetRoute )
+app.use('/api/test', testRoute );
+app.use('/api/auth', authRoute);
+app.use('/api/admin', adminRoute)
+app.use('/api/contact', contactRoute)
+app.use('/api/category', categoryRoute)
+app.use('/api/projet', projetRoute )
 
-app.get('/', (req, res) => {
+app.get('/api', (req, res) => {
   res.send('Hello, TypeScript!');
 });
 
