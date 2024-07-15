@@ -4,7 +4,7 @@ import { ContactProps } from '../interface/contact/contact';
 
 dotenv.config();
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend: Resend  = new Resend(process.env.RESEND_API_KEY);
 
 export async function sendEmail(contactData : ContactProps): Promise<void> {
 

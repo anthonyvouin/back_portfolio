@@ -1,6 +1,9 @@
 import { Request, Response } from 'express';
 import { Projet } from '../models/projet.model';
 import { ProjetProps } from '../interface/projet/projet';
+import { RegisterResponse} from '../interface/response/register'; 
+import fs from 'fs';
+import path from 'path';
 
 
 export const createProjet = async (req: Request<any, any, ProjetProps, any>, res: Response<any>) => {
@@ -33,14 +36,6 @@ export const getAllProjets = async (req: Request, res: Response) => {
     res.status(500).json({ message: 'Erreur serveur' });
   }
 };
-
-
-
-
-
-
-
-
 
 
 
