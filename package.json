@@ -16,9 +16,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npx tsc && npm run copy-files && node dist/app.js ",
-    "copy-files": "copyfiles -u 1 src/uploads/**/* dist/src/",
-    "build": "tsc && npm run copy-files"
+    "start": "npx tsc && node dist/app.js ",
+    "build": "tsc "
   },
   "keywords": [],
   "author": "",
