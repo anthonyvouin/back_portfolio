@@ -1,6 +1,6 @@
 import express, { Router } from "express";
 import { createProjet, getAllProjets}  from "../controllers/projet.controller";
-import upload from "../../config/multer.config";
+import upload from "../config/multer.config";
 import { jwtMiddleware } from "../middleware/jwtMiddleware";
 import { adminMiddleware } from "../middleware/adminMiddleware";
 import { validateProjetData } from "../middleware/validateProjetDataMiddleware";

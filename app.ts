@@ -2,11 +2,11 @@ import  express ,{ Request, Response, Express } from 'express';
 import cors from 'cors'; 
 import testRoute from './src/routes/test';
 import authRoute from './src/routes/auth';
-import connectDB from './config/db.config';
 import adminRoute from './src/routes/admin';
 import contactRoute from './src/routes/contact';
 import categoryRoute from './src/routes/category';
 import projetRoute from './src/routes/projet';
+import connectDB from './src/config/db.config';
 
 
 // Serveur

@@ -1,4 +1,4 @@
 node_modules/
-build/
+dist/
 config/db.config.ts
 .env
