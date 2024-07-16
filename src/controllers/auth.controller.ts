@@ -9,39 +9,39 @@ import { generateToken } from '../middleware/jwtMiddleware';
 
 
 
-// Controller inscription 
-const registerUser = async (req: Request<any, any, UserProps, any>, res: Response<RegisterResponse>) => {
-  try {
-    const userData: UserProps = req.body;
+// // Controller inscription 
+// const registerUser = async (req: Request<any, any, UserProps, any>, res: Response<RegisterResponse>) => {
+//   try {
+//     const userData: UserProps = req.body;
 
-    const existingUser: UserDocument | null = await User.findOne({ email: userData.email });
+//     const existingUser: UserDocument | null = await User.findOne({ email: userData.email });
 
-    if (existingUser) {
-      return res.status(400).json({ message: 'Un compte avec cette adresse e-mail existe déjà.' });
-    }
+//     if (existingUser) {
+//       return res.status(400).json({ message: 'Un compte avec cette adresse e-mail existe déjà.' });
+//     }
 
-    const hashedPassword: string = await bcrypt.hash(userData.password, 10);
+//     const hashedPassword: string = await bcrypt.hash(userData.password, 10);
 
-    const newUser: UserDocument = new User({
-      firstName: userData.firstName,
-      lastName: userData.lastName,
-      email: userData.email,
-      password: hashedPassword,
-      isAdmin: false,
+//     const newUser: UserDocument = new User({
+//       firstName: userData.firstName,
+//       lastName: userData.lastName,
+//       email: userData.email,
+//       password: hashedPassword,
+//       isAdmin: false,
 
-    });
+//     });
 
-    await newUser.save();
+//     await newUser.save();
 
-    const token: string = generateToken({ email: newUser.email, userId: newUser._id, isAdmin:false});
+//     const token: string = generateToken({ email: newUser.email, userId: newUser._id, isAdmin:false});
 
-    const response: RegisterResponse = { message: 'Compte créé avec succès !', token };
-    res.json(response);
-  } catch (error:any) {
-    console.error('Erreur lors de la création du compte:', error.message);
-    res.status(500).send({ message: 'Erreur serveur' });
-  }
-};
+//     const response: RegisterResponse = { message: 'Compte créé avec succès !', token };
+//     res.json(response);
+//   } catch (error:any) {
+//     console.error('Erreur lors de la création du compte:', error.message);
+//     res.status(500).send({ message: 'Erreur serveur' });
+//   }
+// };
 
 
 // Controller Connexion
@@ -152,4 +152,4 @@ const updateUserPassword = async (req: any, res: Response<any>) => {
 };
 
 
-export { registerUser, loginUser, deleteUser, updateUser, updateUserPassword };
+export {  loginUser, deleteUser, updateUser, updateUserPassword };
